@@ -18,9 +18,9 @@ public class CustomerRDBMSDaoImpl implements ICustomerDao{
 	JdbcTemplate jdbcTemplate;
 	@Override
 	public int saveCustomer(Customer customer) {
-	Object[] object = {customer.getCustomerCode(),customer.getCustomerName(),customer.getAddress1(),customer.getAddress2(),customer.getPinCode(),customer.getEmail(),customer.getContactNo(),customer.getContactPerson()};
+	Object[] object = {customer.getCustomerCode(),customer.getCustomerName(),customer.getAddress1(),customer.getAddress2(),customer.getPinCode(),customer.getEmail(),customer.getContactNo(),customer.getContactPerson(),customer.getInactiveFlag()};
 		
-	int i = jdbcTemplate.update("insert into  makercheckercustomertable130 (customer_code,customer_name,customer_address1,customer_address2,customer_pin_code,email_address,contact_number,primary_contact_person) values(?,?,?,?,?,?,?,?)",object);
+	int i = jdbcTemplate.update("insert into  makercheckercustomertable130 (customer_code,customer_name,customer_address1,customer_address2,customer_pin_code,email_address,contact_number,primary_contact_person,active_inactive_flag) values(?,?,?,?,?,?,?,?,?)",object);
 	return i;
 	}
 	@Override
@@ -93,5 +93,108 @@ public class CustomerRDBMSDaoImpl implements ICustomerDao{
 		});
 		return customer1;
 	}
+	@Override
+	public List<Customer> sortinascending() {
+		List<Customer> customer1 =  jdbcTemplate.query("select * from makercheckercustomertable130 order by customer_code asc", new RowMapper<Customer>() {
+
+			@Override
+			public Customer mapRow(ResultSet resultset, int rowno) throws SQLException {
+				Customer customer = new Customer();
+				customer.setCustomerCode(resultset.getString(1));
+				customer.setCustomerName(resultset.getString(2));
+				customer.setAddress1(resultset.getString(3));
+				customer.setAddress2(resultset.getString(4));
+				customer.setPinCode(Integer.parseInt(resultset.getString(5)));
+				customer.setEmail(resultset.getString(6));
+				customer.setContactNo(Long.parseLong(resultset.getString(7)));
+				customer.setContactPerson(resultset.getString(8));
+				customer.setRecordStatus(resultset.getString(9));
+				customer.setInactiveFlag(resultset.getString(10));
+				customer.setCreateDate(resultset.getDate(11));
+				customer.setCreatedBy(resultset.getString(12));
+				customer.setModifiedDate(resultset.getDate(13));
+				customer.setModifiedBy(resultset.getString(14));
+				customer.setAuthorizedDate(resultset.getDate(15));
+				customer.setAuthorizedBy(resultset.getString(16));
+				return customer;
+			}
+			
+		});
+		return customer1;
+	}
+	
+	
+	
+	@Override
+	public List<Customer> sortindescending() {
+		List<Customer> customer1 =  jdbcTemplate.query("select * from makercheckercustomertable130 order by customer_code desc", new RowMapper<Customer>() {
+
+			@Override
+			public Customer mapRow(ResultSet resultset, int rowno) throws SQLException {
+				Customer customer = new Customer();
+				customer.setCustomerCode(resultset.getString(1));
+				customer.setCustomerName(resultset.getString(2));
+				customer.setAddress1(resultset.getString(3));
+				customer.setAddress2(resultset.getString(4));
+				customer.setPinCode(Integer.parseInt(resultset.getString(5)));
+				customer.setEmail(resultset.getString(6));
+				customer.setContactNo(Long.parseLong(resultset.getString(7)));
+				customer.setContactPerson(resultset.getString(8));
+				customer.setRecordStatus(resultset.getString(9));
+				customer.setInactiveFlag(resultset.getString(10));
+				customer.setCreateDate(resultset.getDate(11));
+				customer.setCreatedBy(resultset.getString(12));
+				customer.setModifiedDate(resultset.getDate(13));
+				customer.setModifiedBy(resultset.getString(14));
+				customer.setAuthorizedDate(resultset.getDate(15));
+				customer.setAuthorizedBy(resultset.getString(16));
+				return customer;
+			}
+			
+		});
+		return customer1;
+	}
+	@Override
+	public Customer updateCustomer(Customer customer) {
+		Customer customer1 = jdbcTemplate.query("select * from makercheckercustomertable130 where customer_code='"+customer.getCustomerCode()+"'",new ResultSetExtractor<Customer>()
+		{
+
+			@Override
+			public Customer extractData(ResultSet resultset) throws SQLException, DataAccessException {
+				if(resultset.next())
+				{
+					Customer customer = new Customer();
+					customer.setCustomerCode(resultset.getString(1));
+					customer.setCustomerName(resultset.getString(2));
+					customer.setAddress1(resultset.getString(3));
+					customer.setAddress2(resultset.getString(4));
+					customer.setPinCode(Integer.parseInt(resultset.getString(5)));
+					customer.setEmail(resultset.getString(6));
+					customer.setContactNo(Long.parseLong(resultset.getString(7)));
+					customer.setContactPerson(resultset.getString(8));
+					customer.setRecordStatus(resultset.getString(9));
+					customer.setInactiveFlag(resultset.getString(10));
+					customer.setCreateDate(resultset.getDate(11));
+					customer.setCreatedBy(resultset.getString(12));
+					customer.setModifiedDate(resultset.getDate(13));
+					customer.setModifiedBy(resultset.getString(14));
+					customer.setAuthorizedDate(resultset.getDate(15));
+					customer.setAuthorizedBy(resultset.getString(16));
+					return customer;
+				}
+				return null;
+				
+				
+			}
+	
+		});
+return customer1;
+	}
+	@Override
+	public void updateCustomerdetails(Customer customer2) {
+		Object[] object= {customer2.getCustomerName(),customer2.getAddress1(),customer2.getAddress2(),customer2.getPinCode(),customer2.getEmail(),customer2.getContactNo(),customer2.getContactPerson(),customer2.getInactiveFlag(),customer2.getCustomerCode()};
+		
+		jdbcTemplate.update("update makercheckercustomertable130 set customer_name=?,customer_address1=?,customer_address2=?,customer_pin_code=?,email_address=?,contact_number=?,primary_contact_person=?,active_inactive_flag=? where customer_code=?",object);
+	} 
 
 }

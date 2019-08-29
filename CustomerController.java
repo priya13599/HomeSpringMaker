@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -91,5 +92,55 @@ public class CustomerController {
 		
 	}
 	
+	@RequestMapping("/ascendingorder")
+	public ModelAndView request9()
+	{
+		List<Customer> customer =customerDao.sortinascending();
+		ModelAndView model = new ModelAndView();
+		model.addObject("flag","sn2");
+		model.addObject("customer",customer);
+		model.setViewName("displaycustomerdetails");
+		return model;
+	}
+	
+	
+	@RequestMapping("/descendingorder")
+	public ModelAndView request10()
+	{
+		List<Customer> customer =customerDao.sortindescending();
+		ModelAndView model = new ModelAndView();
+		model.addObject("flag","sn2");
+		model.addObject("customer",customer);
+		model.setViewName("displaycustomerdetails");
+		return model;
+	}
+	
+	@RequestMapping("/updatecustomerdetailsform")
+	public ModelAndView request11(Customer customer)
+	{
+		return new ModelAndView("updatecustomerdetailsform");
+	}
+	
+	@RequestMapping("/updateCustomer")
+	public ModelAndView request12(Customer customer)
+	{
+		Customer customer1 =customerDao.updateCustomer(customer);
+		System.out.println(customer1.toString());
+		ModelAndView model = new ModelAndView();
+		model.addObject("customer",customer1);
+		model.setViewName("updatecustomerdetails");
+		return model;
+	}
+	
+	
+	@RequestMapping("/updateCustomerDetails")
+	public ModelAndView request13(@ModelAttribute("customer2") Customer customer)
+	{
+		customerDao.updateCustomerdetails(customer);
+		ModelAndView model = new ModelAndView();
+		model.addObject("flag","Record Updated Successfully");
+		model.setViewName("updatecustomerdetails");
+		return model;
+	}
 
 }

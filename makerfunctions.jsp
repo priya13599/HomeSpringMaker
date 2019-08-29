@@ -19,17 +19,17 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="Home.html">Home</a></li>
       <li><a href="insertcustomerdetailsform" title="Insert Details"><span class="glyphicon glyphicon-plus"></span> </a></li>
-      <li><a href="UpdateCustomerDetailsForm1.jsp" title="Update Details"><span class="glyphicon glyphicon-edit"></span> </a></li>
+      <li><a href="updatecustomerdetailsform" title="Update Details"><span class="glyphicon glyphicon-edit"></span> </a></li>
       <li><a href="deletecustomerdetailsform" title="Delete Details"><span class="glyphicon glyphicon-trash"></span> </a></li>
       <li><a href="displaycustomerdetailsform1" title="Display Details"><span class="glyphicon glyphicon-list-alt"></span></a></li>
       <li><a href="displaycustomerdetailsform" title="Display Details By ID"><span class="glyphicon glyphicon-th-list"></span> </a></li>
-      <li><a href="DisplayCustomerDetails2.jsp" title="Display Datatable Details"><span class="glyphicon glyphicon-list-alt"></span></a></li>
+      <!-- <li><a href="DisplayCustomerDetails2.jsp" title="Display Datatable Details"><span class="glyphicon glyphicon-list-alt"></span></a></li>
       <li><a href="DisplayCustomerDetailsByCode2.jsp" title="Display Datatable Details By ID"><span class="glyphicon glyphicon-th-list"></span> </a></li>
-      
+        -->
        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Sort By"><span class="caret"  class="glyphicon glyphicon-sort" ></span></a>
         <ul class="dropdown-menu">
-          <li ><a href="CustomerController?button=1">In Ascending Order</a></li>
-          <li ><a href="CustomerController?button=2">In Descending Order</a></li>
+          <li ><a href="ascendingorder">In Ascending Order</a></li>
+          <li ><a href="descendingorder">In Descending Order</a></li>
          </ul>
       </li>
    
